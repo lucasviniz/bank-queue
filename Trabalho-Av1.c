@@ -72,169 +72,6 @@ void imprimeFilaGerentes(FilaGerentes *f);
 void imprimeFilaAtendentes(FilaAtendentes *f);
 void imprimeProximosFila(FilaClientes *f, Pilha *p);
 
-void imprimeFilaClientes(FilaClientes *f, Pilha *p){
-	
-	Pessoa *ptr = f->inicio;
-	
-	if(ptr != NULL){
-		int i=1;
-		printf("------------------------CLIENTES------------------------\n");
-		while(ptr != NULL){
-			printf("------%d - NOME: %s", i, ptr->nome);
-			i++;
-			ptr = ptr->proximo;
-		}
-	}else{
-		printf("FILA VAZIA.\n");
-	}
-}
-
-void imprimeClienteAtual(FilaClientes *f, Pilha *p){
-	
-	Pessoa *ptr = f->inicio;
-	Pilha *aux = ptr->pilhaSolicitacoes->topo;
-	
-	if(ptr != NULL){
-		int i=1;
-		printf("====================CLIENTES=======================\n\n");
-		printf("--------------------FILA-%d------------------------\n", i);
-		printf("------ NOME: %s ------------------\n", ptr->nome);
-		printf("------- CPF: %d ------------------\n", ptr->cpf);
-		printf("\n--------------------------------------------------\n");
-		printf("==================SOLICITACOES======================\n\n");
-		
-		while(ptr->pilhaSolicitacoes->topo != NULL){
-			
-			if(ptr->pilhaSolicitacoes->topo->descricao == 1){
-				printf("SOLICITACAO: (1) - CHECAR CARTAO DE CREDITO\n");
-			}
-			if(ptr->pilhaSolicitacoes->topo->descricao == 2){
-				printf("SOLICITACAO: (2) - VERIFICAR SITUAÇÃO DA CONTA\n");
-			}
-			if(ptr->pilhaSolicitacoes->topo->descricao == 3){
-				printf("SOLICITACAO: (3) - VERIFICAR SALDO ATUAL\n");
-			}
-			if(ptr->pilhaSolicitacoes->topo->descricao == 4){
-				printf("SOLICITACAO: (4) - DEPOSITAR\n");
-			}
-			if(ptr->pilhaSolicitacoes->topo->descricao == 5){
-				printf("SOLICITACAO: (5) - SACAR\n");
-			}
-			
-			ptr->pilhaSolicitacoes->topo = ptr->pilhaSolicitacoes->topo->proximo;
-		}
-		
-		ptr->pilhaSolicitacoes->topo = aux;
-		
-		printf("\n------------CONTA----------");
-		printf("\n-------TITULAR: %s", ptr->conta->titular);
-		printf("\n-------AGENCIA: %d", ptr->conta->agencia);
-		printf("\n-------NUMERO: %d", ptr->conta->numero);
-		printf("\n-------GERENTE: %s", ptr->conta->gerente);
-		printf("\n-------SALDO: %f", ptr->conta->saldo);
-		printf("\n---------------------------");
-		i++;
-		
-	}else{
-		printf("FILA VAZIA!\n");
-	}
-}
-
-void imprimeProximosFila(FilaClientes *f, Pilha *p){
-	
-	Pessoa *ptr = f->inicio->proximo;
-	Pilha *aux = ptr->pilhaSolicitacoes->topo;
-	
-	if(ptr != NULL){
-	
-	int i=1;
-	
-	while(ptr!=NULL){
-		
-		printf("====================CLIENTES=======================\n\n");
-		printf("--------------------FILA-%d------------------------\n", i);
-		printf("------ NOME: %s ------------------\n", ptr->nome);
-		printf("------- CPF: %d ------------------\n", ptr->cpf);
-		printf("\n--------------------------------------------------\n");
-		printf("==================SOLICITACOES======================\n\n");
-		
-		while(ptr->pilhaSolicitacoes->topo != NULL){
-		
-			if(ptr->pilhaSolicitacoes->topo->descricao == 1){
-				printf("SOLICITACAO: (1) - CHECAR CARTAO DE CREDITO\n");
-			}
-			if(ptr->pilhaSolicitacoes->topo->descricao == 2){
-				printf("SOLICITACAO: (2) - VERIFICAR SITUACAO DA CONTA\n");
-			}
-			if(ptr->pilhaSolicitacoes->topo->descricao == 3){
-				printf("SOLICITACAO: (3) - VERIFICAR SALDO ATUAL\n");
-			}
-			if(ptr->pilhaSolicitacoes->topo->descricao == 4){
-				printf("SOLICITACAO: (4) - DEPOSITAR\n");
-			}
-			if(ptr->pilhaSolicitacoes->topo->descricao == 5){
-				printf("SOLICITACAO: (5) - SACAR\n");
-			}
-			
-			ptr->pilhaSolicitacoes->topo = ptr->pilhaSolicitacoes->topo->proximo;
-		}
-		ptr->pilhaSolicitacoes->topo = aux;
-		
-		printf("\n------------CONTA----------\n");
-		printf("\n-------TITULAR: %s", ptr->conta->titular);
-		printf("\n-------AGENCIA: %d", ptr->conta->agencia);
-		printf("\n-------NUMERO: %d", ptr->conta->numero);
-		printf("\n-------GERENTE: %s", ptr->conta->gerente);
-		printf("\n-------SALDO: %f", ptr->conta->saldo);
-		printf("\n----------------------------\n\n");
-		
-		ptr = ptr->proximo;
-		i++;
-		}
-	}else{
-		printf("FILA VAZIA!\n");
-	}
-}
-
-void imprimeFilaGerentes(FilaGerentes *f){
-	
-	Pessoa *ptr = f->inicio;
-	
-	if(ptr != NULL){
-		int i=1;
-		
-		while(ptr != NULL){
-			printf("-----------------FILA-%d-----------------\n", i);
-			printf("------ NOME: %s ------------------\n", ptr->nome);
-			printf("------- CPF: %d ------------------\n", ptr->cpf);
-			printf("\n----------------------------------------\n");
-			
-			i++;
-			ptr = ptr->proximo;
-		}
-	}else{
-		printf("FILA VAZIA!\n");
-	}
-}
-
-void imprimeFilaAtendentes(FilaAtendentes *f){
-	Pessoa *ptr = f->inicio;
-	if(ptr != NULL){
-		int i=1;
-		while(ptr != NULL){
-			printf("-----------------FILA-%d-----------------\n", i);
-			printf("------ NOME: %s ------------------\n", ptr->nome);
-			printf("------- CPF: %d ------------------\n", ptr->cpf);
-			printf("\n----------------------------------------\n");
-			
-			i++;
-			ptr = ptr->proximo;
-		}
-	}else{
-		printf("FILA VAZIA!\n");
-	}
-}
-
 void remover(FilaClientes *f, Pilha *p);
 
 void editar(FilaClientes *f, int cpf);
@@ -248,7 +85,7 @@ void main() {
 	FilaGerentes *filaGerente = (FilaGerentes*) malloc(sizeof(FilaGerentes));
 	Pilha *p1 = (Pilha*) malloc(sizeof(Pilha));
 	
-setlocale(LC_ALL, "Portuguese");
+	setlocale(LC_ALL, "Portuguese");
 	int opcao, existe = 0;
 	char nome;
 	int cpf;	
@@ -463,7 +300,6 @@ setlocale(LC_ALL, "Portuguese");
 	}
 }
 
-
 void inicializarPilha(Pilha *p){
 	p->topo = NULL;
 }
@@ -639,7 +475,168 @@ FilaClientes* adicionarLista(FilaClientes *f, FilaAtendentes *fa, FilaGerentes *
 	return f;
 }
 
+void imprimeFilaClientes(FilaClientes *f, Pilha *p){
+	
+	Pessoa *ptr = f->inicio;
+	
+	if(ptr != NULL){
+		int i=1;
+		printf("------------------------CLIENTES------------------------\n");
+		while(ptr != NULL){
+			printf("------%d - NOME: %s", i, ptr->nome);
+			i++;
+			ptr = ptr->proximo;
+		}
+	}else{
+		printf("FILA VAZIA.\n");
+	}
+}
 
+void imprimeClienteAtual(FilaClientes *f, Pilha *p){
+	
+	Pessoa *ptr = f->inicio;
+	Pilha *aux = ptr->pilhaSolicitacoes->topo;
+	
+	if(ptr != NULL){
+		int i=1;
+		printf("====================CLIENTES=======================\n\n");
+		printf("--------------------FILA-%d------------------------\n", i);
+		printf("------ NOME: %s ------------------\n", ptr->nome);
+		printf("------- CPF: %d ------------------\n", ptr->cpf);
+		printf("\n--------------------------------------------------\n");
+		printf("==================SOLICITACOES======================\n\n");
+		
+		while(ptr->pilhaSolicitacoes->topo != NULL){
+			
+			if(ptr->pilhaSolicitacoes->topo->descricao == 1){
+				printf("SOLICITACAO: (1) - CHECAR CARTAO DE CREDITO\n");
+			}
+			if(ptr->pilhaSolicitacoes->topo->descricao == 2){
+				printf("SOLICITACAO: (2) - VERIFICAR SITUAÇÃO DA CONTA\n");
+			}
+			if(ptr->pilhaSolicitacoes->topo->descricao == 3){
+				printf("SOLICITACAO: (3) - VERIFICAR SALDO ATUAL\n");
+			}
+			if(ptr->pilhaSolicitacoes->topo->descricao == 4){
+				printf("SOLICITACAO: (4) - DEPOSITAR\n");
+			}
+			if(ptr->pilhaSolicitacoes->topo->descricao == 5){
+				printf("SOLICITACAO: (5) - SACAR\n");
+			}
+			
+			ptr->pilhaSolicitacoes->topo = ptr->pilhaSolicitacoes->topo->proximo;
+		}
+		
+		ptr->pilhaSolicitacoes->topo = aux;
+		
+		printf("\n------------CONTA----------");
+		printf("\n-------TITULAR: %s", ptr->conta->titular);
+		printf("\n-------AGENCIA: %d", ptr->conta->agencia);
+		printf("\n-------NUMERO: %d", ptr->conta->numero);
+		printf("\n-------GERENTE: %s", ptr->conta->gerente);
+		printf("\n-------SALDO: %f", ptr->conta->saldo);
+		printf("\n---------------------------");
+		i++;
+		
+	}else{
+		printf("FILA VAZIA!\n");
+	}
+}
+
+void imprimeProximosFila(FilaClientes *f, Pilha *p){
+	
+	Pessoa *ptr = f->inicio->proximo;
+	Pilha *aux = ptr->pilhaSolicitacoes->topo;
+	
+	if(ptr != NULL){
+	
+	int i=1;
+	
+	while(ptr!=NULL){
+		
+		printf("====================CLIENTES=======================\n\n");
+		printf("--------------------FILA-%d------------------------\n", i);
+		printf("------ NOME: %s ------------------\n", ptr->nome);
+		printf("------- CPF: %d ------------------\n", ptr->cpf);
+		printf("\n--------------------------------------------------\n");
+		printf("==================SOLICITACOES======================\n\n");
+		
+		while(ptr->pilhaSolicitacoes->topo != NULL){
+		
+			if(ptr->pilhaSolicitacoes->topo->descricao == 1){
+				printf("SOLICITACAO: (1) - CHECAR CARTAO DE CREDITO\n");
+			}
+			if(ptr->pilhaSolicitacoes->topo->descricao == 2){
+				printf("SOLICITACAO: (2) - VERIFICAR SITUACAO DA CONTA\n");
+			}
+			if(ptr->pilhaSolicitacoes->topo->descricao == 3){
+				printf("SOLICITACAO: (3) - VERIFICAR SALDO ATUAL\n");
+			}
+			if(ptr->pilhaSolicitacoes->topo->descricao == 4){
+				printf("SOLICITACAO: (4) - DEPOSITAR\n");
+			}
+			if(ptr->pilhaSolicitacoes->topo->descricao == 5){
+				printf("SOLICITACAO: (5) - SACAR\n");
+			}
+			
+			ptr->pilhaSolicitacoes->topo = ptr->pilhaSolicitacoes->topo->proximo;
+		}
+		ptr->pilhaSolicitacoes->topo = aux;
+		
+		printf("\n------------CONTA----------\n");
+		printf("\n-------TITULAR: %s", ptr->conta->titular);
+		printf("\n-------AGENCIA: %d", ptr->conta->agencia);
+		printf("\n-------NUMERO: %d", ptr->conta->numero);
+		printf("\n-------GERENTE: %s", ptr->conta->gerente);
+		printf("\n-------SALDO: %f", ptr->conta->saldo);
+		printf("\n----------------------------\n\n");
+		
+		ptr = ptr->proximo;
+		i++;
+		}
+	}else{
+		printf("FILA VAZIA!\n");
+	}
+}
+
+void imprimeFilaGerentes(FilaGerentes *f){
+	
+	Pessoa *ptr = f->inicio;
+	
+	if(ptr != NULL){
+		int i=1;
+		
+		while(ptr != NULL){
+			printf("-----------------FILA-%d-----------------\n", i);
+			printf("------ NOME: %s ------------------\n", ptr->nome);
+			printf("------- CPF: %d ------------------\n", ptr->cpf);
+			printf("\n----------------------------------------\n");
+			
+			i++;
+			ptr = ptr->proximo;
+		}
+	}else{
+		printf("FILA VAZIA!\n");
+	}
+}
+
+void imprimeFilaAtendentes(FilaAtendentes *f){
+	Pessoa *ptr = f->inicio;
+	if(ptr != NULL){
+		int i=1;
+		while(ptr != NULL){
+			printf("-----------------FILA-%d-----------------\n", i);
+			printf("------ NOME: %s ------------------\n", ptr->nome);
+			printf("------- CPF: %d ------------------\n", ptr->cpf);
+			printf("\n----------------------------------------\n");
+			
+			i++;
+			ptr = ptr->proximo;
+		}
+	}else{
+		printf("FILA VAZIA!\n");
+	}
+}
 
 void remover(FilaClientes *f, Pilha *p){
 	
@@ -683,7 +680,6 @@ void remover(FilaClientes *f, Pilha *p){
 		return;
 	}
 }
-				
 
 void editar(FilaClientes *f, int cpf){
 	
@@ -780,4 +776,4 @@ void editarAtributos(Pessoa *ptr){
 				printf("\t-------------------------------------------------\n\n");
 			}
 		}  
-}
+}				
