@@ -64,7 +64,221 @@ void main() {
 	FilaGerentes *filaGerente = (FilaGerentes*) malloc(sizeof(FilaGerentes));
 	Pilha *p1 = (Pilha*) malloc(sizeof(Pilha));
 	
+setlocale(LC_ALL, "Portuguese");
+	int opcao, existe = 0;
+	char nome;
+	int cpf;	
+	
+	if(filaClientes == NULL){
+		printf("Erro de alocacao.\n");
+		exit(0);
+	}else{
+		while(opcao!=11){
+			printf("\t********************************************************\n");
+			printf("\t******* [1] - INICIAR ATENDIMENTO **********************\n");
+			printf("\t******* [2] - CADASTRAR GERENTE ************************\n");
+			printf("\t******* [3] - CADASTRAR ATENDENTE **********************\n");
+			printf("\t******* [4] - (CLIENTES) ENTRAR EM ULTIMO NA FILA ******\n");
+			printf("\t******* [5] - ATENDER SOLICITACAO CLIENTE (REMOVER)*****\n");
+			printf("\t******* [6] - VIZUALIZAR CLIENTE NA FILA ***************\n");
+			printf("\t******* [7] - VIZUALIZAR CLIENTES ATUAIS NO ATENDIMENTO*\n");
+			printf("\t******* [8] - STATUS CLIENTES EM ESPERA ****************\n");
+			printf("\t******* [9] - VIZUALIZAR GERENTES **********************\n");
+			printf("\t******* [10] - VIZUALIZAR ATENDENTES *******************\n");
+			printf("\t******* [11] - EDITAR CLIENTE **************************\n");
+			printf("\t********************************************************\n"); 
+			printf("\nESCOLHA UMA DAS OPCOES ACIMA:");  
+			scanf("%d", &opcao);
+			getchar();
+			
+			switch(opcao){
+				case 1:
+					if(existe == 0){
+						inicializarFila(filaClientes, filaGerente, filaAtendente, p1);
+						system("cls");
+						printf("INICIANDO O ATENDIMENTO...\n");
+				        printf("ATENDIMENTO INICIADO!\n\n");
+						existe = 1;
+					}else{
+						printf("A FILA JA EXISTE\n");
+						system("pause");
+						system("cls");
+					}
+					break;
+				
+				case 2:
+					if(existe == 1){
+						filaGerente = cadastrarGerente(filaGerente);
+						system("cls");
+					}else{
+						printf("FILA VAZIA\n");
+						system("pause");
+						system("cls");
+					}
+					break;
+					
+				case 3:
+					if(existe == 1){
+						filaAtendente = cadastrarAtendentes(filaAtendente);
+						system("cls");
+					}else{
+						printf("FILA VAZIA\n");
+						system("pause");
+						system("cls");
+					}
+					break;
+				
+				case 4:
+					if(existe == 1){
+						filaClientes = adicionarLista(filaClientes, filaAtendente, filaGerente, p1);
+						system("cls");
+					}else{
+						printf("FILA VAZIA\n");
+						system("pause");
+						system("cls");
+					}
+					break;
+				
+				case 5:
+					if(existe == 1){
+						if(filaClientes==NULL){
+							printf("FILA VAZIA\n");	
+							system("pause");
+							system("cls");
+						}else{
+							printf("CLIENTE ATENDIDO!\n");
+							remover(filaClientes, p1);
+							system("pause");
+							system("cls");
+						}
+					}else{
+						printf("FILA NAO INCIADA!\n");
+					}
+					break;
+					
+				case 6:
+					if(existe == 1){
+						if(filaClientes==NULL){
+							printf("FILA VAZIA!\n");
+							system("pause");
+							system("cls");
+						}
+						else{
+							imprimeFilaClientes(filaClientes, p1);
+							system("pause");
+							system("cls");
+						}
+					}else{
+						printf("FILA NAO INCIADA!\n");
+						system("pause");
+						system("cls");
+					}
+					break;
+					
+				case 7:
+					if(existe == 1){
+						if(filaClientes==NULL){
+							printf("FILA VAZIA!\n");
+							system("pause");
+							system("cls");
+						}
+						else{
+							imprimeClienteAtual(filaClientes, p1);
+							system("pause");
+							system("cls");
+						}
+					}else{
+						printf("FILA NAO INCIADA!\n");
+						system("pause");
+						system("cls");
+					}
+					break;
+					
+				case 8:
+					if(existe == 1){
+						if(filaClientes==NULL){
+							printf("FILA VAZIA!\n");
+							system("pause");
+							system("cls");
+						}
+						else{
+							imprimeProximosFila(filaClientes, p1);
+							system("pause");
+							system("cls");
+						}
+					}else{
+						printf("FILA NAO INCIADA!\n");
+						system("pause");
+						system("cls");
+					}
+					break;
+					
+				case 9:
+					if(existe == 1){
+						if(filaAtendente==NULL){
+							printf("FILA VAZIA!\n");
+							system("pause");
+							system("cls");
+						}
+						else{
+							imprimeFilaGerentes(filaGerente);
+							system("pause");
+							system("cls");
+						}
+					}else{
+						printf("FILA NAO INCIADA!\n");
+						system("pause");
+						system("cls");
+					}
+					break;
+					
+				case 10:
+					if(existe == 1){
+						if(filaGerente==NULL){
+							printf("FILA VAZIA!\n");
+							system("pause");
+							system("cls");
+						}
+						else{
+							imprimeFilaAtendentes(filaAtendente);
+							system("pause");
+							system("cls");
+						}
+					}else{
+						printf("FILA NAO INCIADA!\n");
+						system("pause");
+						system("cls");
+					}
+					break;
+					
+				case 11:
+					if(existe == 1){
+						if(filaClientes==NULL){
+							printf("FILA VAZIA\n");	
+							system("pause");
+							system("cls");
+						}else{
+							printf("DIGITE O CPF DA PESSOA QUE DESEJA EDITAR: ");
+							scanf("%d", &cpf);
+							editar(filaClientes, cpf);
+							system("pause");
+							system("cls");
+						}
+					}else{
+						printf("FILA NAO INCIADA!\n");
+					}
+					break;
+					
+				default:
+						system("cls");
+						printf("\n\t --------------- OPCAO INVALIDA! ---------------\n");
+						printf("\tVOCE NAO ESTA DIGITANDO UMA DAS OPCOES ABAIXO!\n"); 	
+						printf("\t-------------------------------------------------\n\n");
+			}
+		}
+	}
 }
+
 
 void inicializarPilha(Pilha *p){
 	p->topo = NULL;
@@ -285,5 +499,101 @@ void remover(FilaClientes *f, Pilha *p){
 		return;
 	}
 }
+				
 
-}				
+void editar(FilaClientes *f, int cpf){
+	
+	Pessoa *ptr = f->inicio;
+	
+	if(ptr != NULL){
+		while(ptr != NULL){
+			if(ptr->cpf == cpf){
+				printf("NOME: %s", ptr->nome);
+				editarAtributos(ptr);
+				printf("NOVO NOME: %s", ptr->nome);
+				break;
+			}		
+			
+			ptr = ptr->proximo;
+		}
+	}else{
+		printf("FILA VAZIA!\n");
+	}
+}
+
+void editarAtributos(Pessoa *ptr){
+	int aux = 9;
+	
+	while(aux!=0){
+	
+	printf("\nQUAL INFORMACAO DA PESSOA VOCE DESEJA EDITAR?");
+	printf("\n-------------------------------------------\n");
+	printf("--- (1)-Nome ------------\n");
+	printf("--- (2)-CPF -------------\n");
+	printf("--- (3)-NOME DO GERENTE -\n");
+	printf("--- (4)-AGENCIA ---------\n");
+	printf("--- (5)-NUMERO DA CONTA -\n");
+	printf("--- (6)-SALDO DA CONTA --\n");
+	printf("--- (0)-SAIR ------------\n");
+	scanf ("%d", &aux); 
+	getchar();
+	
+		switch (aux){
+			
+			case 1: 
+				system("cls");
+				printf("\nDIGITE A NOVA PESSOA: ");
+				printf("\n-----------------------\n");
+				fgets(ptr->nome, sizeof(ptr->nome), stdin);
+				printf(" -- O NOME FOI EDITADO! --");
+				break;
+				
+			case 2: 
+				system("cls");
+				printf("\nDIGITE O NOVO CPF DA PESSOA: ");
+				printf("\n------------------------------\n");
+				scanf("%d", &ptr->cpf);
+				printf(" -- O CPF FOI EDITADO! -- ");
+				break;
+				
+			case 3: 
+				system("cls");
+				printf("\nDIGITE O NOVO GERENTE: ");
+				printf("\n------------------------\n");
+				fgets(ptr->conta->gerente, sizeof(ptr->conta->gerente), stdin);
+				getchar();
+				printf(" - O GERENTE FOI EDITADO! - ");
+				break;
+				
+			case 4: 
+				system("cls");
+				printf("\nDIGITE A NOVA AGENCIA: ");
+				printf("\n-----------------------\n");
+				scanf("%d", &ptr->conta->agencia);
+				printf(" - A AGENCIA FOI EDITADO! - ");
+				break;
+				
+			case 5: 
+				system("cls");
+				printf("\nDIGITE O NOVO NUMERO DA CONTA: ");
+				printf("\n--------------------------------\n");
+				scanf("%d", &ptr->conta->numero);
+				printf(" - O NUMERO DA CONTA FOI EDITADO! - ");
+				break; 
+				
+			case 6: 
+				system("cls");
+				printf("\nDIGITE O NOVO SALDO DA CONTA: ");
+				printf("\n-------------------------------\n");
+				scanf("%f", &ptr->conta->saldo);
+				printf(" - O SALDO DA CONTA FOI EDITADO! - ");
+				break;	
+				
+			default:
+				system("cls");
+				printf("\n\t --------------- OPCAO INVALIDA! ---------------\n");
+				printf("\tVOCE NAO ESTA DIGITANDO UMA DAS OPCOES DO MENU!\n"); 	
+				printf("\t-------------------------------------------------\n\n");
+			}
+		}  
+}
